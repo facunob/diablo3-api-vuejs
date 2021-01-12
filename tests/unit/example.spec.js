@@ -1,12 +1,16 @@
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mount } from "@vue/test-utils";
+import { huevo, espinaca } from "./jestTest";
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe("Se va a probar la calidad de los ingredientes", () => {
+  test("Calidad del huevo", () => {
+    expect(huevo().estado[0]).toBe("fresco");
+  });
+
+  test("Calidad de la espinaca", () => {
+    expect(espinaca()).toEqual({
+      estado: 1,
+
+      color: "verde",
     });
-    expect(wrapper.text()).toMatch(msg);
   });
 });

@@ -1,19 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <load-layout v-if="isLoading">
+      <base-loading />
+    </load-layout>
+
+    <main-layout v-else />
   </div>
 </template>
 
+<script>
+import LoadLayout from "@/layouts/LoadLayout.vue";
+import MainLayout from "@/layouts/MainLayout.vue";
+import BaseLoading from "@/components/BaseLoading.vue";
+import { mapState } from "vuex";
+export default {
+  name: "App",
+  components: { LoadLayout, MainLayout, BaseLoading },
+  computed: {
+    ...mapState("loading", { isLoading: "isLoading" }),
+  },
+};
+</script>
+
 <style lang="stylus">
 #app
-  font-family Avenir, Helvetica, Arial, sans-serif
+  padding 60px 0
+  font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+  color #ffffff // Le ponemos un color de letra blanco para que resalte
+  background-color #15202b // Le cambiamos el color de fondo por un azul marino oscuro
 </style>
